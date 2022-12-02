@@ -1,4 +1,13 @@
 <?php include("header.php"); 
+      include "../inc/dbinfo.inc";
+
+      $connection = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD);
+
+if (mysqli_connect_errno()) echo "Failed to connect to MySQL: " . mysqli_connect_error();
+
+$database = mysqli_select_db($connection, DB_DATABASE);
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -105,125 +114,27 @@
 
     <div class="container mt-5">
         <div class="row">
-            <div class="col-lg-3">
-                <form action="manage_cart.php" method="POST">
-                    <div class="card">
-                        <img src="images/10.jpg" class="card-img-top">
-                    <div class="card-body text-center">
-                        <h5 class="card-title">Graphic Shirt Striped</h5>
-                        <p class="card-text">Price: $50.00</p>
-                        <button type="submit" name="Add_Cart" class="btn btn-info">Add Cart</button>
-                        <input type="hidden" name="Item_Name" value="Graphic Shirt Striped">
-                        <input type="hidden" name="Price" value="50">
-                    </div> 
+            <?php
+                $resultM = mysqli_query($connection, "SELECT * FROM prodinfo WHERE sex='M'");
+                while($row = $resultM->fetch_assoc()) {
+                    ?>
+                     <div class="col-lg-3">
+                        <form action="manage_cart.php" method="POST">
+                            <div class="card">
+                            <img src="data:image/jpg;charset=utf8;base64,<?php echo base64_encode($row['prodimg']); ?>" />
+                            <div class="card-body text-center">
+                                <h5 class="card-title"> <?php echo $row['prodname']?></h5>
+                                <p class="card-text">Price: $ <?php echo $row['prodprice']?></p>
+                                <button type="submit" name="Add_Cart" class="btn btn-info">Add Cart</button>
+                                <input type="hidden" name="Item_Name" value="Graphic Shirt Striped">
+                                <input type="hidden" name="Price" value="50">
+                            </div> 
+                            </div>
+                        </form>
                     </div>
-                </form>
-            </div>
-            <div class="col-lg-3">
-                <form action="manage_cart.php" method="POST">
-                    <div class="card">
-                        <img src="images/6.jpg" class="card-img-top">
-                    <div class="card-body text-center">
-                        <h5 class="card-title">Gold Black T-Shirt</h5>
-                        <p class="card-text">Price: $50.00</p>
-                        <button type="submit" name="Add_Cart" class="btn btn-info">Add Cart</button>
-                        <input type="hidden" name="Item_Name" value="Gold Black T-Shirt">
-                        <input type="hidden" name="Price" value="50">
-                    </div> 
-                    </div>
-                </form>
-            </div>
-            <div class="col-lg-3">
-                <form action="manage_cart.php" method="POST">
-                    <div class="card">
-                        <img src="images/7.jpg" class="card-img-top">
-                    <div class="card-body text-center">
-                        <h5 class="card-title">Chain Black T-Shirt</h5>
-                        <p class="card-text">Price: $50.00</p>
-                        <button type="submit" name="Add_Cart" class="btn btn-info">Add Cart</button>
-                        <input type="hidden"  name="Item_Name" value="Chain Black T-Shirt">
-                        <input type="hidden" name="Price" value="50">
-                    </div> 
-                    </div>
-                </form>
-            </div>
-            <div class="col-lg-3">
-                <form action="manage_cart.php" method="POST">
-                    <div class="card">
-                        <img src="images/5.jpg" class="card-img-top">
-                    <div class="card-body text-center">
-                        <h5 class="card-title">Gray & Black Jacket</h5>
-                        <p class="card-text">Price: $100.00</p>
-                        <button type="submit" name="Add_Cart" class="btn btn-info">Add Cart</button>
-                        <input type="hidden" name="Item_Name" value="Gray & Black Jacket">
-                        <input type="hidden" name="Price" value="100">
-                    </div> 
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-
-
-
-    <div class="container mt-5">
-        <div class="row">
-            <div class="col-lg-3">
-                <form action="manage_cart.php" method="POST">
-                    <div class="card">
-                        <img src="images/11.jpg" class="card-img-top">
-                    <div class="card-body text-center">
-                        <h5 class="card-title">Plaid Printed Pencil Pant</h5>
-                        <p class="card-text">Price: $70.00</p>
-                        <button type="submit" name="Add_Cart" class="btn btn-info">Add Cart</button>
-                        <input type="hidden" name="Item_Name" value="Plaid Printed Pencil Pant">
-                        <input type="hidden" name="Price" value="70">
-                    </div> 
-                    </div>
-                </form>
-            </div>
-            <div class="col-lg-3">
-                <form action="manage_cart.php" method="POST">
-                    <div class="card">
-                        <img src="images/12.jpg" class="card-img-top">
-                    <div class="card-body text-center">
-                        <h5 class="card-title">Cargo Pant</h5>
-                        <p class="card-text">Price: $45.00</p>
-                        <button type="submit" name="Add_Cart" class="btn btn-info">Add Cart</button>
-                        <input type="hidden" name="Item_Name" value="Cargo Pant">
-                        <input type="hidden" name="Price" value="45">
-                    </div> 
-                    </div>
-                </form>
-            </div>
-            <div class="col-lg-3">
-                <form action="manage_cart.php" method="POST">
-                    <div class="card">
-                        <img src="images/14.jpg" class="card-img-top">
-                    <div class="card-body text-center">
-                        <h5 class="card-title">Jeans Short</h5>
-                        <p class="card-text">Price: $60.00</p>
-                        <button type="submit" name="Add_Cart" class="btn btn-info">Add Cart</button>
-                        <input type="hidden" name="Item_Name" value="Jeans Shor">
-                        <input type="hidden" name="Price" value="60">
-                    </div> 
-                    </div>
-                </form>
-            </div>
-            <div class="col-lg-3">
-                <form action="manage_cart.php" method="POST">
-                    <div class="card">
-                        <img src="images/13.jpg" class="card-img-top">
-                    <div class="card-body text-center">
-                        <h5 class="card-title">Lounge Short</h5>
-                        <p class="card-text">Price: $40.00</p>
-                        <button type="submit" name="Add_Cart" class="btn btn-info">Add Cart</button>
-                        <input type="hidden" name="Item_Name" value="Lounge Short">
-                        <input type="hidden" name="Price" value="40">
-                    </div> 
-                    </div>
-                </form>
-            </div>
+                    <?php
+                }
+            ?>
         </div>
     </div>
 
@@ -231,13 +142,17 @@
 
     <div class="container mt-5">
         <div class="row">
+        <?php
+                $resultM = mysqli_query($connection, "SELECT * FROM prodinfo WHERE sex='F'");
+                while($row = $resultM->fetch_assoc()) {
+                    ?>
             <div class="col-lg-3">
                 <form action="manage_cart.php" method="POST">
                     <div class="card">
-                        <img src="images/15.jpg" class="card-img-top">
+                    <img src="data:image/jpg;charset=utf8;base64,<?php echo base64_encode($row['prodimg']); ?>" />
                     <div class="card-body text-center">
-                        <h5 class="card-title">Green Joggers</h5>
-                        <p class="card-text">Price: $60.00</p>
+                        <h5 class="card-title"> <?php echo $row['prodname']?></h5>
+                        <p class="card-text">Price: $ <?php echo $row['prodprice']?></p>
                         <button type="submit" name="Add_Cart" class="btn btn-info">Add Cart</button>
                         <input type="hidden" name="Item_Name" value="Green Joggers">
                         <input type="hidden" name="Price" value="60">
@@ -245,50 +160,10 @@
                     </div>
                 </form>
             </div>
-            <div class="col-lg-3">
-                <form action="manage_cart.php" method="POST">
-                    <div class="card">
-                        <img src="images/16.jpg" class="card-img-top">
-                    <div class="card-body text-center">
-                        <h5 class="card-title">Ribbon Short</h5>
-                        <p class="card-text">Price: $50.00</p>
-                        <button type="submit" name="Add_Cart" class="btn btn-info">Add Cart</button>
-                        <input type="hidden" name="Item_Name" value="Ribbon Short">
-                        <input type="hidden" name="Price" value="50">
-                    </div> 
-                    </div>
-                </form>
-            </div>
-            <div class="col-lg-3">
-                <form action="manage_cart.php" method="POST">
-                    <div class="card">
-                        <img src="images/17.jpg" class="card-img-top">
-                    <div class="card-body text-center">
-                        <h5 class="card-title">Merci T-Shirt</h5>
-                        <p class="card-text">Price: $50.00</p>
-                        <button type="submit" name="Add_Cart" class="btn btn-info">Add Cart</button>
-                        <input type="hidden"  name="Item_Name" value="Merci T-Shirt">
-                        <input type="hidden" name="Price" value="50">
-                    </div> 
-                    </div>
-                </form>
-            </div>
-            <div class="col-lg-3">
-                <form action="manage_cart.php" method="POST">
-                    <div class="card">
-                        <img src="images/18.jpg" class="card-img-top">
-                    <div class="card-body text-center">
-                        <h5 class="card-title">Gray Shoes</h5>
-                        <p class="card-text">Price: $180.00</p>
-                        <button type="submit" name="Add_Cart" class="btn btn-info">Add Cart</button>
-                        <input type="hidden" name="Item_Name" value="Gray Shoes">
-                        <input type="hidden" name="Price" value="180">
-                    </div> 
-                    </div>
-                </form>
-            </div>
+            <?php
+                }
+                ?>
         </div>
     </div>
-    
 </body>
 </html>
